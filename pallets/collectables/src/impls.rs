@@ -25,7 +25,7 @@ impl<T: Config> Pallet<T> {
             owner: owner.clone(),
         };
 
-        KittiesOwned::<T>::append(&owner, dna);
+        KittiesOwned::<T>::try_append(&owner, dna).map_err(|_| Error::<T>::TooManyOwned)?;
 
         Kitties::<T>::insert(dna, kitty);
         CountForKitties::<T>::set(new_count);
