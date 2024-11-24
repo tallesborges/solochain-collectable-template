@@ -13,8 +13,10 @@
 
 use crate as pallet_kitties;
 use crate::*;
+use frame_support::construct_runtime;
+use frame_support::derive_impl;
+use frame_support::testing_prelude::*;
 use frame_support::traits::tokens::fungible::*;
-use frame_support::{construct_runtime, derive_impl, testing_prelude::*};
 use sp_runtime::BuildStorage;
 
 type Balance = u64;
