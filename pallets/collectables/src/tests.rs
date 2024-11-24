@@ -13,10 +13,14 @@
 
 use crate as pallet_kitties;
 use crate::*;
+use codec::Decode;
+use codec::Encode;
+use codec::MaxEncodedLen;
 use frame_support::construct_runtime;
 use frame_support::derive_impl;
 use frame_support::testing_prelude::*;
 use frame_support::traits::tokens::fungible::*;
+use scale_info::TypeInfo;
 use sp_runtime::BuildStorage;
 use sp_runtime::DispatchError;
 
@@ -172,7 +176,7 @@ fn kitties_map_created_correctly() {
     new_test_ext().execute_with(|| {
         let zero_key = [0u8; 32];
         assert!(!Kitties::<TestRuntime>::contains_key(zero_key));
-        Kitties::<TestRuntime>::insert(zero_key, ());
+        Kitties::<TestRuntime>::insert(zero_key, DEFAULT_KITTY);
         assert!(Kitties::<TestRuntime>::contains_key(zero_key));
     })
 }
@@ -193,5 +197,26 @@ fn cannot_mint_duplicate_kitty() {
             PalletKitties::mint(BOB, [0u8; 32]),
             Error::<TestRuntime>::DuplicateKitty
         );
+    })
+}
+
+#[test]
+fn kitty_struct_has_expected_traits() {
+    new_test_ext().execute_with(|| {
+        let kitty = DEFAULT_KITTY;
+        let bytes = kitty.encode();
+        let _decoded_kitty = Kitty::<TestRuntime>::decode(&mut &bytes[..]).unwrap();
+        assert!(Kitty::<TestRuntime>::max_encoded_len() > 0);
+        let _info = Kitty::<TestRuntime>::type_info();
+    })
+}
+
+#[test]
+fn mint_stores_owner_in_kitty() {
+    new_test_ext().execute_with(|| {
+        assert_ok!(PalletKitties::mint(1337, [42u8; 32]));
+        let kitty = Kitties::<TestRuntime>::get([42u8; 32]).unwrap();
+        assert_eq!(kitty.owner, 1337);
+        assert_eq!(kitty.dna, [42u8; 32]);
     })
 }
