@@ -24,6 +24,9 @@ impl<T: Config> Pallet<T> {
             dna,
             owner: owner.clone(),
         };
+
+        KittiesOwned::<T>::append(&owner, dna);
+
         Kitties::<T>::insert(dna, kitty);
         CountForKitties::<T>::set(new_count);
         Self::deposit_event(Event::<T>::Created { owner });
