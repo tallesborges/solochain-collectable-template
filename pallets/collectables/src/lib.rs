@@ -30,7 +30,9 @@ pub mod pallet {
     }
 
     #[pallet::error]
-    pub enum Error<T> {}
+    pub enum Error<T> {
+        TooManyKitties,
+    }
 
     #[pallet::call]
     impl<T: Config> Pallet<T> {
