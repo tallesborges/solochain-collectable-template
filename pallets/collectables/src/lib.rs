@@ -49,7 +49,7 @@ pub mod pallet {
     impl<T: Config> Pallet<T> {
         pub fn create_kitty(origin: OriginFor<T>) -> DispatchResult {
             let who = ensure_signed(origin)?;
-            let dna = [0u8; 32];
+            let dna = Self::gen_dna();
             Self::mint(who, dna)?;
             Ok(())
         }
