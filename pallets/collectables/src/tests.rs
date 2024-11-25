@@ -307,10 +307,7 @@ fn transfer_logic_works() {
 fn native_balance_associated_type_works() {
 	new_test_ext().execute_with(|| {
 		assert_ok!(<<TestRuntime as Config>::NativeBalance as Mutate<_>>::mint_into(&ALICE, 1337));
-		assert_eq!(
-			<<TestRuntime as Config>::NativeBalance as Inspect<_>>::total_balance(&ALICE),
-			1337
-		);
+		assert_eq!(<<TestRuntime as Config>::NativeBalance as Inspect<_>>::total_balance(&ALICE), 1337);
 	});
 }
 
@@ -332,8 +329,7 @@ fn set_price_emits_event() {
 		assert_ok!(PalletKitties::set_price(RuntimeOrigin::signed(ALICE), kitty_id, Some(1337)));
 		// Assert the last event is `PriceSet` event with the correct information.
 		System::assert_last_event(
-			Event::<TestRuntime>::PriceSet { caller: ALICE, kitty_id, new_price: Some(1337) }
-				.into(),
+			Event::<TestRuntime>::PriceSet { caller: ALICE, kitty_id, new_price: Some(1337) }.into(),
 		);
 	})
 }
