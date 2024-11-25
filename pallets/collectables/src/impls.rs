@@ -23,6 +23,7 @@ impl<T: Config> Pallet<T> {
         let kitty = Kitty {
             dna,
             owner: owner.clone(),
+            price: None,
         };
 
         KittiesOwned::<T>::try_append(&owner, dna).map_err(|_| Error::<T>::TooManyOwned)?;
@@ -41,6 +42,7 @@ impl<T: Config> Pallet<T> {
 
         // update the new owner
         kitty.owner = to.clone();
+        kitty.price = None;
 
         let mut to_owned = KittiesOwned::<T>::get(&to);
         to_owned
