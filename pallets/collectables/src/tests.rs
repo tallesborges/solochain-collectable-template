@@ -307,7 +307,10 @@ fn transfer_logic_works() {
 fn native_balance_associated_type_works() {
 	new_test_ext().execute_with(|| {
 		assert_ok!(<<TestRuntime as Config>::NativeBalance as Mutate<_>>::mint_into(&ALICE, 1337));
-		assert_eq!(<<TestRuntime as Config>::NativeBalance as Inspect<_>>::total_balance(&ALICE), 1337);
+		assert_eq!(
+			<<TestRuntime as Config>::NativeBalance as Inspect<_>>::total_balance(&ALICE),
+			1337
+		);
 	});
 }
 
@@ -329,7 +332,8 @@ fn set_price_emits_event() {
 		assert_ok!(PalletKitties::set_price(RuntimeOrigin::signed(ALICE), kitty_id, Some(1337)));
 		// Assert the last event is `PriceSet` event with the correct information.
 		System::assert_last_event(
-			Event::<TestRuntime>::PriceSet { caller: ALICE, kitty_id, new_price: Some(1337) }.into(),
+			Event::<TestRuntime>::PriceSet { caller: ALICE, kitty_id, new_price: Some(1337) }
+				.into(),
 		);
 	})
 }
@@ -344,5 +348,22 @@ fn set_price_logic_works() {
 		assert_ok!(PalletKitties::set_price(RuntimeOrigin::signed(ALICE), kitty_id, Some(1337)));
 		let kitty = Kitties::<TestRuntime>::get(kitty_id).unwrap();
 		assert_eq!(kitty.price, Some(1337));
+	})
+}
+
+#[test]
+fn do_buy_kitty_emits_event() {
+	new_test_ext().execute_with(|| {
+		// We need to set block number to 1 to view events.
+		System::set_block_number(1);
+		assert_ok!(PalletKitties::create_kitty(RuntimeOrigin::signed(ALICE)));
+		let kitty_id = Kitties::<TestRuntime>::iter_keys().collect::<Vec<_>>()[0];
+		assert_ok!(PalletKitties::set_price(RuntimeOrigin::signed(ALICE), kitty_id, Some(1337)));
+		assert_ok!(PalletBalances::mint_into(&BOB, 100_000));
+		assert_ok!(PalletKitties::buy_kitty(RuntimeOrigin::signed(BOB), kitty_id, 1337));
+		// Assert the last event by our blockchain is the `Created` event with the correct owner.
+		System::assert_last_event(
+			Event::<TestRuntime>::Sold { buyer: BOB, kitty_id, price: 1337 }.into(),
+		);
 	})
 }
