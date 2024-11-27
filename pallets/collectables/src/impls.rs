@@ -1,6 +1,7 @@
 use super::*;
 use frame_support::pallet_prelude::*;
-use frame_support::traits::tokens::Preservation;
+use frame_support::traits::Currency;
+use frame_support::traits::ExistenceRequirement;
 use frame_support::Hashable;
 
 impl<T: Config> Pallet<T> {
@@ -85,7 +86,23 @@ impl<T: Config> Pallet<T> {
 
 		ensure!(price >= real_price, Error::<T>::MaxPriceTooLow);
 
-		T::NativeBalance::transfer(&buyer, &kitty.owner, real_price, Preservation::Preserve)?;
+		T::Currency::transfer(&buyer, &kitty.owner, real_price, ExistenceRequirement::KeepAlive)?;
+
+		// Currency::<T::AccountId>::transfer(
+		// 	&buyer,
+		// 	&kitty.owner,
+		// 	real_price,
+		// 	ExistenceRequirement::AllowDeath,
+		// );
+
+		// pallet_balances::Pallet::<T>::transfer(
+		// 	&buyer,
+		// 	&kitty.owner,
+		// 	real_price,
+		// 	Preservation::Preserve,
+		// )?;
+
+		// T::NativeBalance::transfer(&buyer, &kitty.owner, real_price, Preservation::Preserve)?;
 
 		Self::do_transfer(kitty.owner, buyer.clone(), kitty_id)?;
 
