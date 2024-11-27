@@ -6,8 +6,6 @@ mod tests;
 
 pub use pallet::*;
 
-// type BalanceOf<T> = <T as pallet_balances::Config>::Balance;
-
 #[frame_support::pallet(dev_mode)]
 pub mod pallet {
 	use super::*;
