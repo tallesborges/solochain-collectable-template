@@ -163,5 +163,5 @@ impl pallet_template::Config for Runtime {
 
 impl pallet_collectables::Config for Runtime {
     type RuntimeEvent = RuntimeEvent;
-    type Currency = Balances;
+    type Currency = pallet_balances::Pallet<Runtime>;
 }
