@@ -13,17 +13,29 @@ pub mod pallet {
 	use frame_support::traits::fungible::{Inspect, Mutate};
 	use frame_system::pallet_prelude::*;
 
+	//----------------------------------------------------------------------------
+	// Types and Constants
+	//----------------------------------------------------------------------------
+
 	pub type BalanceOf<T> =
 		<<T as Config>::Currency as Inspect<<T as frame_system::Config>::AccountId>>::Balance;
 
 	#[pallet::pallet]
 	pub struct Pallet<T>(core::marker::PhantomData<T>);
 
+	//----------------------------------------------------------------------------
+	// Configuration
+	//----------------------------------------------------------------------------
+
 	#[pallet::config]
 	pub trait Config: frame_system::Config {
 		type RuntimeEvent: From<Event<Self>> + IsType<<Self as frame_system::Config>::RuntimeEvent>;
 		type Currency: Inspect<Self::AccountId> + Mutate<Self::AccountId>;
 	}
+
+	//----------------------------------------------------------------------------
+	// Storage
+	//----------------------------------------------------------------------------
 
 	#[derive(Encode, Decode, TypeInfo, MaxEncodedLen)]
 	#[scale_info(skip_type_params(T))]
@@ -46,6 +58,10 @@ pub mod pallet {
 		QueryKind = ValueQuery,
 	>;
 
+	//----------------------------------------------------------------------------
+	// Events
+	//----------------------------------------------------------------------------
+
 	#[pallet::event]
 	#[pallet::generate_deposit(pub(super) fn deposit_event)]
 	pub enum Event<T: Config> {
@@ -54,6 +70,10 @@ pub mod pallet {
 		PriceSet { caller: T::AccountId, kitty_id: [u8; 32], new_price: Option<BalanceOf<T>> },
 		Sold { buyer: T::AccountId, kitty_id: [u8; 32], price: BalanceOf<T> },
 	}
+
+	//----------------------------------------------------------------------------
+	// Errors
+	//----------------------------------------------------------------------------
 
 	#[pallet::error]
 	pub enum Error<T> {
@@ -66,6 +86,10 @@ pub mod pallet {
 		NotForSale,
 		MaxPriceTooLow,
 	}
+
+	//----------------------------------------------------------------------------
+	// Extrinsics
+	//----------------------------------------------------------------------------
 
 	#[pallet::call]
 	impl<T: Config> Pallet<T> {
