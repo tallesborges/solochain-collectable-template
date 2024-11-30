@@ -4,6 +4,9 @@ mod impls;
 #[cfg(test)]
 mod tests;
 
+#[cfg(feature = "runtime-benchmarks")]
+mod benchmarking;
+
 pub use pallet::*;
 
 #[frame_support::pallet(dev_mode)]
@@ -93,6 +96,7 @@ pub mod pallet {
 
 	#[pallet::call]
 	impl<T: Config> Pallet<T> {
+		#[pallet::call_index(0)]
 		pub fn create_kitty(origin: OriginFor<T>) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 			let dna = Self::gen_dna();
@@ -100,6 +104,7 @@ pub mod pallet {
 			Ok(())
 		}
 
+		#[pallet::call_index(1)]
 		pub fn transfer(
 			origin: OriginFor<T>,
 			to: T::AccountId,
@@ -110,6 +115,7 @@ pub mod pallet {
 			Ok(())
 		}
 
+		#[pallet::call_index(2)]
 		pub fn set_price(
 			origin: OriginFor<T>,
 			kitty_id: [u8; 32],
@@ -120,6 +126,7 @@ pub mod pallet {
 			Ok(())
 		}
 
+		#[pallet::call_index(3)]
 		pub fn buy_kitty(
 			origin: OriginFor<T>,
 			kitty_id: [u8; 32],
