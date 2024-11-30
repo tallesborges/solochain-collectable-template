@@ -70,6 +70,7 @@ impl pallet_balances::Config for TestRuntime {
 impl pallet_kitties::Config for TestRuntime {
 	type RuntimeEvent = RuntimeEvent;
 	type Currency = PalletBalances;
+	type WeightInfo = ();
 }
 
 // We need to run most of our tests using this function: `new_test_ext().execute_with(|| { ... });`
