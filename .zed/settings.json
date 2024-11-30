@@ -15,7 +15,7 @@
         // },
         // To disable the checking entirely
         // (ignores all cargo and check settings below)
-        "checkOnSave": true,
+        // "checkOnSave": false,
         // To check the `lib` target only.
         "cargo": {
           "allTargets": false

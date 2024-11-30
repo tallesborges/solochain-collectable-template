@@ -10,11 +10,11 @@ pub use pallet::*;
 pub mod pallet {
 	use super::*;
 	use frame_support::pallet_prelude::*;
-	use frame_support::traits::Currency;
+	use frame_support::traits::fungible::{Inspect, Mutate};
 	use frame_system::pallet_prelude::*;
 
 	pub type BalanceOf<T> =
-		<<T as Config>::Currency as Currency<<T as frame_system::Config>::AccountId>>::Balance;
+		<<T as Config>::Currency as Inspect<<T as frame_system::Config>::AccountId>>::Balance;
 
 	#[pallet::pallet]
 	pub struct Pallet<T>(core::marker::PhantomData<T>);
@@ -22,7 +22,7 @@ pub mod pallet {
 	#[pallet::config]
 	pub trait Config: frame_system::Config {
 		type RuntimeEvent: From<Event<Self>> + IsType<<Self as frame_system::Config>::RuntimeEvent>;
-		type Currency: Currency<Self::AccountId>;
+		type Currency: Inspect<Self::AccountId> + Mutate<Self::AccountId>;
 	}
 
 	#[derive(Encode, Decode, TypeInfo, MaxEncodedLen)]
