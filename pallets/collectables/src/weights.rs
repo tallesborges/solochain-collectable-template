@@ -8,7 +8,7 @@
 //! WASM-EXECUTION: `Compiled`, CHAIN: `Some("dev")`, DB CACHE: `1024`
 
 // Executed Command:
-// ./target/debug/solochain-template-node
+// ./target/release/solochain-template-node
 // benchmark
 // pallet
 // --pallet
@@ -42,56 +42,56 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	/// Storage: `System::ParentHash` (r:1 w:0)
 	/// Proof: `System::ParentHash` (`max_values`: Some(1), `max_size`: Some(32), added: 527, mode: `MaxEncodedLen`)
 	/// Storage: `CollectablesModule::CountForKitties` (r:1 w:1)
-	/// Proof: `CollectablesModule::CountForKitties` (`max_values`: Some(1), `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::CountForKitties` (`max_values`: Some(1), `max_size`: Some(4), added: 499, mode: `MaxEncodedLen`)
 	/// Storage: `CollectablesModule::Kitties` (r:1 w:1)
-	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: Some(129), added: 2604, mode: `MaxEncodedLen`)
 	/// Storage: `CollectablesModule::KittiesOwned` (r:1 w:1)
-	/// Proof: `CollectablesModule::KittiesOwned` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::KittiesOwned` (`max_values`: None, `max_size`: Some(3250), added: 5725, mode: `MaxEncodedLen`)
 	fn create_kitty() -> Weight {
 		// Proof Size summary in bytes:
 		//  Measured:  `42`
-		//  Estimated: `3507`
-		// Minimum execution time: 240_000_000 picoseconds.
-		Weight::from_parts(254_000_000, 3507)
+		//  Estimated: `6715`
+		// Minimum execution time: 14_000_000 picoseconds.
+		Weight::from_parts(15_000_000, 6715)
 			.saturating_add(T::DbWeight::get().reads(4_u64))
 			.saturating_add(T::DbWeight::get().writes(3_u64))
 	}
 	/// Storage: `CollectablesModule::Kitties` (r:1 w:1)
-	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: Some(129), added: 2604, mode: `MaxEncodedLen`)
 	/// Storage: `CollectablesModule::KittiesOwned` (r:2 w:2)
-	/// Proof: `CollectablesModule::KittiesOwned` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::KittiesOwned` (`max_values`: None, `max_size`: Some(3250), added: 5725, mode: `MaxEncodedLen`)
 	fn transfer() -> Weight {
 		// Proof Size summary in bytes:
 		//  Measured:  `313`
-		//  Estimated: `6253`
-		// Minimum execution time: 286_000_000 picoseconds.
-		Weight::from_parts(298_000_000, 6253)
+		//  Estimated: `12440`
+		// Minimum execution time: 19_000_000 picoseconds.
+		Weight::from_parts(20_000_000, 12440)
 			.saturating_add(T::DbWeight::get().reads(3_u64))
 			.saturating_add(T::DbWeight::get().writes(3_u64))
 	}
 	/// Storage: `CollectablesModule::Kitties` (r:1 w:1)
-	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: Some(129), added: 2604, mode: `MaxEncodedLen`)
 	fn set_price() -> Weight {
 		// Proof Size summary in bytes:
 		//  Measured:  `241`
-		//  Estimated: `3706`
-		// Minimum execution time: 147_000_000 picoseconds.
-		Weight::from_parts(150_000_000, 3706)
+		//  Estimated: `3594`
+		// Minimum execution time: 10_000_000 picoseconds.
+		Weight::from_parts(10_000_000, 3594)
 			.saturating_add(T::DbWeight::get().reads(1_u64))
 			.saturating_add(T::DbWeight::get().writes(1_u64))
 	}
 	/// Storage: `CollectablesModule::Kitties` (r:1 w:1)
-	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: Some(129), added: 2604, mode: `MaxEncodedLen`)
 	/// Storage: `System::Account` (r:1 w:1)
 	/// Proof: `System::Account` (`max_values`: None, `max_size`: Some(128), added: 2603, mode: `MaxEncodedLen`)
 	/// Storage: `CollectablesModule::KittiesOwned` (r:2 w:2)
-	/// Proof: `CollectablesModule::KittiesOwned` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::KittiesOwned` (`max_values`: None, `max_size`: Some(3250), added: 5725, mode: `MaxEncodedLen`)
 	fn buy_kitty() -> Weight {
 		// Proof Size summary in bytes:
 		//  Measured:  `432`
-		//  Estimated: `6372`
-		// Minimum execution time: 823_000_000 picoseconds.
-		Weight::from_parts(851_000_000, 6372)
+		//  Estimated: `12440`
+		// Minimum execution time: 52_000_000 picoseconds.
+		Weight::from_parts(53_000_000, 12440)
 			.saturating_add(T::DbWeight::get().reads(4_u64))
 			.saturating_add(T::DbWeight::get().writes(4_u64))
 	}
@@ -102,56 +102,56 @@ impl WeightInfo for () {
 	/// Storage: `System::ParentHash` (r:1 w:0)
 	/// Proof: `System::ParentHash` (`max_values`: Some(1), `max_size`: Some(32), added: 527, mode: `MaxEncodedLen`)
 	/// Storage: `CollectablesModule::CountForKitties` (r:1 w:1)
-	/// Proof: `CollectablesModule::CountForKitties` (`max_values`: Some(1), `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::CountForKitties` (`max_values`: Some(1), `max_size`: Some(4), added: 499, mode: `MaxEncodedLen`)
 	/// Storage: `CollectablesModule::Kitties` (r:1 w:1)
-	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: Some(129), added: 2604, mode: `MaxEncodedLen`)
 	/// Storage: `CollectablesModule::KittiesOwned` (r:1 w:1)
-	/// Proof: `CollectablesModule::KittiesOwned` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::KittiesOwned` (`max_values`: None, `max_size`: Some(3250), added: 5725, mode: `MaxEncodedLen`)
 	fn create_kitty() -> Weight {
 		// Proof Size summary in bytes:
 		//  Measured:  `42`
-		//  Estimated: `3507`
-		// Minimum execution time: 240_000_000 picoseconds.
-		Weight::from_parts(254_000_000, 3507)
+		//  Estimated: `6715`
+		// Minimum execution time: 14_000_000 picoseconds.
+		Weight::from_parts(15_000_000, 6715)
 			.saturating_add(RocksDbWeight::get().reads(4_u64))
 			.saturating_add(RocksDbWeight::get().writes(3_u64))
 	}
 	/// Storage: `CollectablesModule::Kitties` (r:1 w:1)
-	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: Some(129), added: 2604, mode: `MaxEncodedLen`)
 	/// Storage: `CollectablesModule::KittiesOwned` (r:2 w:2)
-	/// Proof: `CollectablesModule::KittiesOwned` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::KittiesOwned` (`max_values`: None, `max_size`: Some(3250), added: 5725, mode: `MaxEncodedLen`)
 	fn transfer() -> Weight {
 		// Proof Size summary in bytes:
 		//  Measured:  `313`
-		//  Estimated: `6253`
-		// Minimum execution time: 286_000_000 picoseconds.
-		Weight::from_parts(298_000_000, 6253)
+		//  Estimated: `12440`
+		// Minimum execution time: 19_000_000 picoseconds.
+		Weight::from_parts(20_000_000, 12440)
 			.saturating_add(RocksDbWeight::get().reads(3_u64))
 			.saturating_add(RocksDbWeight::get().writes(3_u64))
 	}
 	/// Storage: `CollectablesModule::Kitties` (r:1 w:1)
-	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: Some(129), added: 2604, mode: `MaxEncodedLen`)
 	fn set_price() -> Weight {
 		// Proof Size summary in bytes:
 		//  Measured:  `241`
-		//  Estimated: `3706`
-		// Minimum execution time: 147_000_000 picoseconds.
-		Weight::from_parts(150_000_000, 3706)
+		//  Estimated: `3594`
+		// Minimum execution time: 10_000_000 picoseconds.
+		Weight::from_parts(10_000_000, 3594)
 			.saturating_add(RocksDbWeight::get().reads(1_u64))
 			.saturating_add(RocksDbWeight::get().writes(1_u64))
 	}
 	/// Storage: `CollectablesModule::Kitties` (r:1 w:1)
-	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::Kitties` (`max_values`: None, `max_size`: Some(129), added: 2604, mode: `MaxEncodedLen`)
 	/// Storage: `System::Account` (r:1 w:1)
 	/// Proof: `System::Account` (`max_values`: None, `max_size`: Some(128), added: 2603, mode: `MaxEncodedLen`)
 	/// Storage: `CollectablesModule::KittiesOwned` (r:2 w:2)
-	/// Proof: `CollectablesModule::KittiesOwned` (`max_values`: None, `max_size`: None, mode: `Measured`)
+	/// Proof: `CollectablesModule::KittiesOwned` (`max_values`: None, `max_size`: Some(3250), added: 5725, mode: `MaxEncodedLen`)
 	fn buy_kitty() -> Weight {
 		// Proof Size summary in bytes:
 		//  Measured:  `432`
-		//  Estimated: `6372`
-		// Minimum execution time: 823_000_000 picoseconds.
-		Weight::from_parts(851_000_000, 6372)
+		//  Estimated: `12440`
+		// Minimum execution time: 52_000_000 picoseconds.
+		Weight::from_parts(53_000_000, 12440)
 			.saturating_add(RocksDbWeight::get().reads(4_u64))
 			.saturating_add(RocksDbWeight::get().writes(4_u64))
 	}
