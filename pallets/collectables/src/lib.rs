@@ -11,11 +11,11 @@ pub use weights::*;
 
 pub use pallet::*;
 
-#[frame_support::pallet(dev_mode)]
+#[frame_support::pallet]
 pub mod pallet {
 	use super::*;
-	use frame_support::pallet_prelude::*;
 	use frame_support::traits::fungible::{Inspect, Mutate};
+	use frame_support::{pallet_prelude::*, Blake2_128Concat};
 	use frame_system::pallet_prelude::*;
 
 	//----------------------------------------------------------------------------
@@ -55,13 +55,15 @@ pub mod pallet {
 	pub(super) type CountForKitties<T: Config> = StorageValue<Value = u32, QueryKind = ValueQuery>;
 
 	#[pallet::storage]
-	pub(super) type Kitties<T: Config> = StorageMap<Key = [u8; 32], Value = Kitty<T>>;
+	pub(super) type Kitties<T: Config> = StorageMap<_, Blake2_128Concat, [u8; 32], Kitty<T>>;
 
 	#[pallet::storage]
 	pub(super) type KittiesOwned<T: Config> = StorageMap<
-		Key = T::AccountId,
-		Value = BoundedVec<[u8; 32], ConstU32<100>>,
-		QueryKind = ValueQuery,
+		_,
+		Blake2_128Concat,
+		T::AccountId,
+		BoundedVec<[u8; 32], ConstU32<100>>,
+		ValueQuery,
 	>;
 
 	//----------------------------------------------------------------------------
