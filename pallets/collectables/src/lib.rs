@@ -109,6 +109,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(1)]
+		#[pallet::weight(T::WeightInfo::transfer())]
 		pub fn transfer(
 			origin: OriginFor<T>,
 			to: T::AccountId,
@@ -120,6 +121,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(2)]
+		#[pallet::weight(T::WeightInfo::set_price())]
 		pub fn set_price(
 			origin: OriginFor<T>,
 			kitty_id: [u8; 32],
@@ -131,6 +133,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(3)]
+		#[pallet::weight(T::WeightInfo::buy_kitty())]
 		pub fn buy_kitty(
 			origin: OriginFor<T>,
 			kitty_id: [u8; 32],
